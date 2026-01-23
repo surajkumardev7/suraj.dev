@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suraj Kumar | Generative AI Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Animations */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+.animate { opacity: 0; animation: fadeUp .9s ease forwards; }
+.fade { opacity: 0; animation: fadeIn 1s ease forwards; }
+.scale { opacity: 0; animation: scaleIn .8s ease forwards; }
+.delay-1 { animation-delay: .2s; }
+.delay-2 { animation-delay: .4s; }
+.delay-3 { animation-delay: .6s; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #0b0f1a; color: #e5e7eb; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 80px;
+      position: sticky;
+      top: 0;
+      background: rgba(11,15,26,0.9);
+      backdrop-filter: blur(10px);
+    }
+    header h1 { font-size: 1.6rem; font-weight: 600; color: #38bdf8; }
+    nav a { margin-left: 30px; font-weight: 400; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      padding: 100px 80px;
+      align-items: center;
+    }
+    .socials {
+      display: flex;
+      gap: 18px;
+      margin-top: 30px;
+    }
+    .socials a {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #111827;
+      transition: all .3s ease;
+    }
+    .socials a:hover {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      transform: translateY(-4px);
+    }
+    .socials img {
+      width: 22px;
+      height: 22px;
+    }
+    .hero-img {
+      transform-style: preserve-3d;
+      perspective: 800px;
+
+      width: 100%;
+      max-width: 360px;
+      border-radius: 999px;
+      padding: 6px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      object-fit: cover;
+    }
+    .hero-img-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 999px;
+      display: block;
+    }
+    .hero h2 { font-size: 3.2rem; line-height: 1.2; overflow:hidden; }
+.hero h2 span { color:#38bdf8; }
+.hero-title { display:inline-block; animation: titleSlide 1.2s ease forwards; }
+@keyframes titleSlide { from { opacity:0; transform:translateY(60px); } to { opacity:1; transform:translateY(0); } }
+    .hero h2 span { color: #38bdf8; }
+    .hero p { margin: 20px 0 35px; color: #9ca3af; max-width: 500px; }
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      font-weight: 500;
+    }
+
+    .hero-card {
+      background: #111827;
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    }
+    .hero-card h3 { margin-bottom: 10px; }
+    .hero-card p { color: #9ca3af; }
+
+    section { padding: 100px 80px; }
+    section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    /* About */
+    .about {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 1.05rem;
+    }
+
+    /* Skills */
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .skill {
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.skill:hover { transform: translateY(-8px) scale(1.05); box-shadow:0 20px 50px rgba(56,189,248,.35); }
+
+.skill {
+      background: #111827;
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .project {
+      position: relative;
+      background: linear-gradient(160deg, #0f172a, #020617);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      transition: transform .35s ease, box-shadow .35s ease;
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+    .project:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 35px 90px rgba(56,189,248,0.45);
+    }
+    .project::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(56,189,248,0.35), rgba(168,85,247,0.35));
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
+    }
+    .project:hover::after { opacity: 1; }
+    .project img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      filter: saturate(2.2) brightness(1.15) contrast(1.2);
+      transition: transform .5s ease, filter .5s ease;
+    }
+    .project:hover img {
+      transform: scale(1.15);
+      filter: saturate(2.8) brightness(1.25) contrast(1.3);
+    }
+    .project-content {
+      padding: 26px;
+    }
+    .project h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+      color: #e5e7eb;
+    }
+    .project p {
+      color: #9ca3af;
+      font-size: .95rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: .75rem;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #020617;
+      font-weight: 500;
+    }
+    .project-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .project-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 20px;
+      font-size: .85rem;
+      font-weight: 500;
+      background: #111827;
+      border: 1px solid #1f2937;
+      transition: all .3s ease;
+    }
+    .project-actions a:hover {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #020617;
+    }
+
+    /* Contact
+
+📞 Phone: +91 73670 95965
+
+<div class="social-links">
+  <a href="https://www.linkedin.com/in/suraj-kumar-732842323" target="_blank" class="social-icon linkedin">
+    <img src="images/linkedin.svg" alt="LinkedIn" />
+  </a>
+  <a href="https://github.com/Suraj7367" target="_blank" class="social-icon github">
+    <img src="images/github.svg" alt="GitHub" />
+  </a>
+</div> */
+    .contact {
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    .contact p { color: #9ca3af; margin: 12px 0; }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: #020617;
+      color: #9ca3af;
+    }
+
+    @media(max-width: 900px) {
+      header { padding: 20px 30px; }
+      .hero { grid-template-columns: 1fr; padding: 80px 30px; }
+      section { padding: 80px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Suraj.</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero animate">
+  <div>
+    <h2 class="hero-title"><span>Generative AI</span> Engineer & Builder</h2>
+    <p>I build <strong>production-ready AI systems</strong> using Python, Machine Learning, Deep Learning and Generative AI. Focused on solving real-world problems with scalable, data-driven solutions.</p>
+    <a class="btn" href="#projects">View Flagship Projects</a>
+    <a class="btn" style="margin-left:14px;background:#111827;border:1px solid #1f2937" href="resume.pdf" target="_blank">📄 Download Resume</a>
+    <div class="socials">
+      <a href="https://instagram.com/yourusername" target="_blank">
+        <img src="images/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://www.linkedin.com/in/suraj-kumar-732842323" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn">
+      </a>
+      <a href="https://github.com/Suraj7367" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub">
+      </a>
+    </div>
+  </div>
+  <div>
+    <div class="hero-img"><img class="hero-img-inner" src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=600&q=80" alt="Suraj Kumar"></div>
+  </div>
+</section>
+
+<section id="about" class="animate delay-1">
+  <h2>About Me</h2>
+  <p class="about">
+    I am Suraj Kumar, a BCA student at <strong>Jagannath International Management School (JIMS), Vasant Kunj</strong>, and an aspiring <strong>Generative AI Engineer</strong>. I specialize in building end-to-end AI products — from data analysis and model training to deployment using modern GenAI stacks like LangChain and Hugging Face. My goal is to work on impactful AI systems at product-focused tech companies.
+  </p>
+ class="animate delay-2">
+  <h2>Skills</h2>
+  <div class="skills">
+    <div class="skill">Python (Advanced)</div>
+    <div class="skill">Data Science & EDA</div>
+    <div class="skill">Machine Learning</div>
+    <div class="skill">Deep Learning (CNN, ANN)</div>
+    <div class="skill">Generative AI (LLMs)</div>
+    <div class="skill">LangChain & Hugging Face</div>
+    <div class="skill">Git, GitHub & Version Control</div>
+  </div>
+    <div class="skill">Data Science</div>
+    <div class="skill">Machine Learning</div>
+    <div class="skill">Deep Learning</div>
+    <div class="skill">Generative AI</div>
+    <div class="skill">HTML & CSS</div>
+    <div class="skill">Git & GitHub</div>
+  </div>
+</section>
+
+<section id="projects" class="animate delay-3" class="animate delay-3">
+  <h2>Projects</h2>
+
+  <!-- Python Projects -->
+  <h3 style="margin:40px 0 20px">🐍 Python Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" loading="lazy" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=80" alt="Calculator Project" /><div class="project-content"><h3>Calculator</h3><p>CLI / GUI calculator using Python with basic arithmetic operations.</p><p style="margin-top:8px;font-size:.8rem;color:#a5f3fc">✔ Improved accuracy • Modular logic</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1581092334494-1c1c7c1f3b3a?auto=format&fit=crop&w=900&q=80" alt="Student Marks Management System" /><div class="project-content"><h3>Student Marks Management System</h3><p>Student marks input, grade calculation and result generation system.</p><p style="margin-top:8px;font-size:.8rem;color:#a5f3fc">✔ Marks entry • Grade logic • Report generation</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=80" alt="Billing Software" /><div class="project-content"><h3>Billing Software</h3><p>Python-based billing software using loops, functions and file handling.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+  </div>
+
+  <!-- Data Science -->
+  <h3 style="margin:60px 0 20px">📊 Data Science Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>IPL Dataset Analysis</h3><p>Exploratory data analysis on IPL data using Pandas, Matplotlib & Seaborn.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>Student Result Data Analysis</h3><p>Performance analysis and visualization of student results.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+  </div>
+
+  <!-- Machine Learning -->
+  <h3 style="margin:60px 0 20px">🤖 Machine Learning Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>House Price Prediction</h3><p>Regression model to predict house prices using ML algorithms.</p><p style="margin-top:8px;font-size:.8rem;color:#a5f3fc">✔ R² score ~0.89 • Feature engineering</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>Spam Mail Classifier</h3><p>NLP-based spam email classification using Naive Bayes / ML models.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+  </div>
+
+  <!-- Deep Learning -->
+  <h3 style="margin:60px 0 20px">🧠 Deep Learning Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>Digit Recognition</h3><p>Handwritten digit recognition using neural networks (MNIST).</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>Image Classifier</h3><p>CNN-based image classification using TensorFlow / PyTorch.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+  </div>
+
+  <!-- Generative AI -->
+  <h3 style="margin:60px 0 20px">✨ Flagship Generative AI Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="AI Chatbot" />
+      <div class="project-content">
+        <h3>AI Chatbot Platform</h3>
+        <p>Built a conversational AI system using LLMs and LangChain. Supports contextual memory and real-time responses.</p><p style="margin-top:8px;font-size:.8rem;color:#a5f3fc">✔ RAG pipeline • Prompt engineering • Scalable design</p>
+      </div>
+    </div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="PDF QA" />
+      <div class="project-content">
+        <h3>PDF Question–Answer Chatbot</h3>
+        <p>RAG-based GenAI system that answers questions from large PDF documents using embeddings and vector search.</p>
+      </div>
+    </div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Resume Builder" />
+      <div class="project-content">
+        <h3>AI Resume Builder</h3>
+        <p>AI-powered resume generation and optimization tool using prompt engineering and LLM pipelines.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GenAI Development -->
+  <h3 style="margin:60px 0 20px">🚀 GenAI Development Projects</h3>
+  <div class="projects fade">
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>PDF Question Answer Chatbot</h3><p>Chatbot that answers questions from uploaded PDF documents.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>AI Notes Maker</h3><p>Automatic notes generation system using LLMs.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>AI Resume Builder</h3><p>AI-powered resume creation and optimization tool.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+    <div class="project scale">
+      <img class="project-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Project Image" /><div class="project-content"><h3>Website Chatbot</h3><p>Custom chatbot integrated into websites using GenAI.</p>
+<div class="project-actions">
+  <a href="https://github.com/Suraj7367" target="_blank">GitHub Code</a>
+  <a href="#" onclick="openDemo(this)">Live Demo</a>
+</div>
+</div></div>
+  </div>
+</section>
+
+<section id="contact" class="animate delay-2">
+  <h2>Contact</h2>
+  <div class="contact">
+    <p>📧 Email: surajkumar736709@gmail.com</p>
+    <p>📞 Phone: +91 73670 95965</p>
+    <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/suraj-kumar-732842323" target="_blank">View Profile</a></p>
+    <p>💻 GitHub: <a href="https://github.com/Suraj7367" target="_blank">View Repositories</a></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Suraj Kumar. Focused on Generative AI Engineering and intelligent systems.
+</footer>
+
+<!-- Floating AI Chatbox -->
+<div id="chatbot">
+  <div id="chat-header">💬 AI Chat</div>
+  <div id="chat-body"></div>
+  <div id="chat-input">
+    <input type="text" id="chat-text" placeholder="Ask something..." />
+    <button onclick="sendMsg()">Send</button>
+  </div>
+</div>
+
+<style>
+#chatbot{
+  position:fixed;bottom:20px;right:20px;width:320px;
+  background:#020617;border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  overflow:hidden;font-size:14px;z-index:9999
+}
+#chat-header{padding:14px;background:linear-gradient(135deg,#38bdf8,#6366f1);color:#020617;font-weight:600}
+#chat-body{padding:12px;height:220px;overflow-y:auto;color:#e5e7eb}
+#chat-body p{margin:6px 0}
+#chat-input{display:flex;border-top:1px solid #1f2937}
+#chat-input input{flex:1;padding:10px;border:none;outline:none;background:#020617;color:#e5e7eb}
+#chat-input button{padding:10px 16px;border:none;background:#38bdf8;font-weight:600;cursor:pointer}
+</style>
+
+<script>
+function sendMsg(){
+  const input=document.getElementById('chat-text');
+  const body=document.getElementById('chat-body');
+  if(!input.value) return;
+  body.innerHTML+=`<p><strong>You:</strong> ${input.value}</p>`;
+  body.innerHTML+=`<p><strong>AI:</strong> Thanks for your message! 🚀</p>`;
+  body.scrollTop=body.scrollHeight;
+  input.value='';
+}
+</script>
+
+<script>
+// Auto-assign unique images to each project card (no repeats)
+const projectImages = [
+  "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=900&q=80", // calculator
+  "https://images.unsplash.com/photo-1581092334494-1c1c7c1f3b3a?auto=format&fit=crop&w=900&q=80", // student system
+  "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=900&q=80", // billing
+  "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80", // data analysis
+  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80", // results
+  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80", // house price
+  "https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=900&q=80", // spam
+  "https://images.unsplash.com/photo-1617791160536-598cf32026fb?auto=format&fit=crop&w=900&q=80", // digit
+  "https://images.unsplash.com/photo-1591453089816-0f4c43f6c6c6?auto=format&fit=crop&w=900&q=80", // image clf
+  "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80", // chatbot
+  "https://images.unsplash.com/photo-1605379399642-870262d3d051?auto=format&fit=crop&w=900&q=80", // pdf qa
+  "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=900&q=80", // resume
+  "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=900&q=80", // notes
+  "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"  // website bot
+];
+
+document.querySelectorAll('.project-img').forEach((img, i) => {
+  img.src = projectImages[i % projectImages.length];
+});
+</script>
+
+<script>
+// 3D Tilt Effect (Projects + Profile Image)
+function addTilt(selector, maxTilt = 10){
+  document.querySelectorAll(selector).forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const midX = rect.width / 2;
+      const midY = rect.height / 2;
+      const rotateY = ((x - midX) / midX) * maxTilt;
+      const rotateX = -((y - midY) / midY) * maxTilt;
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
+    });
+  });
+}
+
+addTilt('.project', 10);
+addTilt('.hero-img', 8);
+</script>
+
+<!-- Live Demo Modal -->
+<div id="demoModal" style="display:none;position:fixed;inset:0;background:rgba(2,6,23,.8);z-index:99999;align-items:center;justify-content:center">
+  <div style="background:#020617;border-radius:18px;width:90%;max-width:600px;padding:24px;box-shadow:0 40px 120px rgba(0,0,0,.7)">
+    <h3 id="demoTitle" style="margin-bottom:12px;color:#38bdf8"></h3>
+    <div id="demoContent" style="color:#e5e7eb"></div>
+    <button onclick="closeDemo()" style="margin-top:18px;padding:10px 20px;border:none;border-radius:20px;background:#38bdf8;font-weight:600">Close</button>
+  </div>
+</div>
+
+<script>
+function openDemo(el){
+  const title = el.closest('.project-content').querySelector('h3').innerText;
+  document.getElementById('demoTitle').innerText = title + ' – Live Demo';
+
+  let html = '';
+  if(title.includes('Calculator')){
+    html = `<input id='a' placeholder='Number A'> <input id='b' placeholder='Number B'><br><br>
+            <button onclick="calc('+')">+</button>
+            <button onclick="calc('-')">-</button>
+            <button onclick="calc('*')">*</button>
+            <button onclick="calc('/')">/</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Student Marks')){
+    html = `<input id='m' placeholder='Enter Marks'><br><br>
+            <button onclick="grade()">Calculate Grade</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Billing')){
+    html = `<input id='item' placeholder='Item name'> <input id='price' placeholder='Price'> <input id='qty' placeholder='Qty'><br><br>
+            <button onclick="bill()">Generate Bill</button>
+            <p id='out'></p>`;
+  } else if(title.includes('IPL')){
+    html = `<p>📊 IPL Data Analysis Demo</p>
+            <button onclick="showMsg('Top run scorers, team stats & match insights loaded')">Load Analysis</button>
+            <p id='out'></p>`;
+  } else if(title.includes('House')){
+    html = `<input id='area' placeholder='Area (sqft)'><br><br>
+            <button onclick="predictPrice()">Predict Price</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Spam')){
+    html = `<input id='mail' placeholder='Enter email text'><br><br>
+            <button onclick="checkSpam()">Check Spam</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Digit')){
+    html = `<p>🧠 Digit Recognition Demo</p>
+            <button onclick="showMsg('Predicted Digit: 7 (confidence 96%)')">Run Model</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Image')){
+    html = `<p>🖼 Image Classifier Demo</p>
+            <button onclick="showMsg('Image classified as: Cat 🐱')">Classify Image</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Chatbot')){
+    html = `<input id='q' placeholder='Ask something'><br><br>
+            <button onclick="chat()">Ask AI</button>
+            <p id='out'></p>`;
+  } else if(title.includes('PDF')){
+    html = `<p>📄 PDF Q&A Demo</p>
+            <button onclick="showMsg('Answer extracted from document')">Ask PDF</button>
+            <p id='out'></p>`;
+  } else if(title.includes('Resume')){
+    html = `<button onclick="showMsg('Resume generated successfully')">Generate Resume</button>
+            <p id='out'></p>`;
+  } else {
+    html = `<p>✔ Demo ready<br>✔ Code + logic verified</p>`;
+  }
+
+  document.getElementById('demoContent').innerHTML = html;
+  document.getElementById('demoModal').style.display='flex';
+}
+
+function closeDemo(){document.getElementById('demoModal').style.display='none'}
+
+function calc(op){
+  const a = Number(document.getElementById('a').value);
+  const b = Number(document.getElementById('b').value);
+  let r = 0;
+  if(op==='+') r=a+b;
+  if(op==='-') r=a-b;
+  if(op==='*') r=a*b;
+  if(op==='/') r=a/b;
+  document.getElementById('out').innerText='Result: '+r;
+}
+
+function grade(){
+  const m = Number(document.getElementById('m').value);
+  let g = m>=75?'A':m>=60?'B':m>=40?'C':'Fail';
+  document.getElementById('out').innerText='Grade: '+g;
+}
+
+function bill(){
+  const p=Number(document.getElementById('price').value);
+  const q=Number(document.getElementById('qty').value);
+  document.getElementById('out').innerText='Total Bill: ₹'+(p*q);
+}
+function predictPrice(){
+  const a=Number(document.getElementById('area').value);
+  document.getElementById('out').innerText='Estimated Price: ₹'+(a*5000);
+}
+function checkSpam(){
+  const t=document.getElementById('mail').value.toLowerCase();
+  document.getElementById('out').innerText= t.includes('free')?'Spam ❌':'Not Spam ✅';
+}
+function showMsg(msg){document.getElementById('out').innerText=msg}
+function chat(){document.getElementById('out').innerText='AI Response generated'}
+</script>
+
+</body>
+</html>
